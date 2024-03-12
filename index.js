@@ -9,10 +9,10 @@ app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
 
 const usuarioroutes = require('./routes/UsuarioRoutes')
-const filmeroutes = require('./routes/FilmeRoutes')
+const produtoroutes = require('./routes/ProdutoRoutes')
 const postRoutes = require('./routes/PostRoutes')
 app.use(usuarioroutes)
-app.use(filmeroutes)
+app.use(produtoroutes)
 app.use(postRoutes)
 
 app.listen(port, function(){

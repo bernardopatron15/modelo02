@@ -1,6 +1,6 @@
 const conexao = require('../config/conexao') 
 
-let FilmeSchema = new conexao.Schema({
+let ProdutoSchema = new conexao.Schema({
     titulo: String,
     genero: String,
     diretor: String,
@@ -9,4 +9,4 @@ let FilmeSchema = new conexao.Schema({
     foto: String
 })
 
-module.exports = conexao.model("Filme", FilmeSchema)
+module.exports = conexao.model("Produto", ProdutoSchema)

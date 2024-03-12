@@ -22,7 +22,7 @@
         <td>
             <img style="width: 200px;" src="/fotos/<%=post.foto %>" alt="Foto do Post">
         </td>
-        <td><%=post.usuario.nome%></td>
+        <td><%= post.usuario ? post.usuario.nome : '' %></td>
         <td>
             <a href="/post/edt/<%=post._id %>">Editar</a>
         </td>

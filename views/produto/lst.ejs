@@ -13,17 +13,17 @@
         <th>Deleta</th>
     </tr>
 
-    <%Filmes.forEach(function(filme){  %>
+    <%Produtos.forEach(function(produto){  %>
     <tr>
-        <td><%=filme._id %></td>
-        <td><%=filme.titulo %></td>
-        <td><%=filme.ano %></td>
-        <td><%=filme.tempo %></td>
+        <td><%=produto._id %></td>
+        <td><%=produto.titulo %></td>
+        <td><%=produto.ano %></td>
+        <td><%=produto.tempo %></td>
         <td>
-            <a href="/filme/edt/<%=filme._id %>">Editar</a>
+            <a href="/produto/edt/<%=produto._id %>">Editar</a>
         </td>
         <td>
-            <a href="/filme/del/<%=filme._id %>">Deletar</a>
+            <a href="/produto/del/<%=produto._id %>">Deletar</a>
         </td>
     </tr>
     <% }) %>
