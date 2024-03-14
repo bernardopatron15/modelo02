@@ -5,22 +5,17 @@ function abreadd(req, res) {
 }
 
 function add(req, res) {
-    let tempo = req.body.tempo; // Supondo que você esteja recebendo o valor do formulário corretamente
+   // Supondo que você esteja recebendo o valor do formulário corretamente
 
     // Obtendo a hora e minuto a partir do valor do tempo
-    let [hora, minuto] = tempo.split(':');
 
     // Criando um novo objeto Date
-    let data = new Date();
-    data.setHours(hora);
-    data.setMinutes(minuto);
     let produto = new Produto({
         titulo: req.body.titulo,
-        genero: req.body.genero,
-        diretor: req.body.diretor,
-        ano: parseInt(req.body.ano),
+        descricao: req.body.descricao,
+        categoria: req.body.categoria,
+        preco: parseInt(req.body.preco),
         foto: req.body.foto,
-        tempo: data
     })
 
     produto.save().then(function (produto, err) {
@@ -34,7 +29,9 @@ function add(req, res) {
 
 function listar(req, res) {
     Produto.find({}).then(function (produtos, err) {
-        if (err) {
+        if (err) {<td>
+            <img style="width: 200px;" src="/fotos/<%=usuario.foto %>" alt="Foto do Usuário">
+        </td>
             res.send(err)
         } else {
             res.render('produto/lst', {
@@ -42,7 +39,9 @@ function listar(req, res) {
             })
         }
     })
-}
+}<td>
+<img style="width: 200px;" src="/fotos/<%=usuario.foto %>" alt="Foto do Usuário">
+</td>
 
 function filtrar(req, res) {
     Produto.find({
@@ -94,11 +93,10 @@ function edt(req, res) {
             data.setHours(hora);
             data.setMinutes(minuto);
             produto.titulo = req.body.titulo;
-            produto.genero = req.body.genero;
-            produto.diretor = req.body.diretor;
-            produto.ano = req.body.ano;
+            produto.descricao = req.body.descricao;
+            produto.categorias = req.body.categorias;
+            produto.preco = req.body.preco;
             produto.foto = req.body.foto;
-            produto.tempo = data;
             produto.save().then(function (produto, err) {
                 if (err) {
                     res.send(err);

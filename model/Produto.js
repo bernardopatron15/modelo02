@@ -2,10 +2,9 @@ const conexao = require('../config/conexao')
 
 let ProdutoSchema = new conexao.Schema({
     titulo: String,
-    genero: String,
-    diretor: String,
-    ano: Number,
-    tempo: { type: Date },
+    descricao: String,
+    preco: Number,
+    categoria: String,
     foto: String
 })
 
