@@ -1,115 +1,86 @@
-const Produto = require('../model/Produto')
+const Produto = require('../model/Produto');
 
 function abreadd(req, res) {
-    res.render('produto/add')
+    res.render('produto/add');
 }
 
 function add(req, res) {
-   // Supondo que você esteja recebendo o valor do formulário corretamente
-
-    // Obtendo a hora e minuto a partir do valor do tempo
-
-    // Criando um novo objeto Date
     let produto = new Produto({
         titulo: req.body.titulo,
         descricao: req.body.descricao,
         categoria: req.body.categoria,
         preco: parseInt(req.body.preco),
         foto: req.body.foto,
-    })
+    });
 
-    produto.save().then(function (produto, err) {
-        if (err) {
-            res.send(err);
-        } else {
-            res.redirect("/produto/add")
-        }
-    })
+    produto.save().then(function (produto) {
+        res.redirect("/produto/add");
+    }).catch(function (err) {
+        res.send(err);
+    });
 }
 
 function listar(req, res) {
-    Produto.find({}).then(function (produtos, err) {
-        if (err) {<td>
-            <img style="width: 200px;" src="/fotos/<%=usuario.foto %>" alt="Foto do Usuário">
-        </td>
-            res.send(err)
-        } else {
-            res.render('produto/lst', {
-                Produtos: produtos
-            })
-        }
-    })
-}<td>
-<img style="width: 200px;" src="/fotos/<%=usuario.foto %>" alt="Foto do Usuário">
-</td>
+    Produto.find({}).then(function (produtos) {
+        res.render('produto/lst', {
+            Produtos: produtos
+        });
+    }).catch(function (err) {
+        res.send(err);
+    });
+}
 
 function filtrar(req, res) {
     Produto.find({
         titulo: new RegExp(req.body.pesquisar.split(' ').join('.*'), 'ig')
-    }).then(function (produtos, err) {
-        if (err) {
-            res.send(err)
-        } else {
-            res.render('produto/lst', {
-                Produtos: produtos
-            })
-        }
-    })
+    }).then(function (produtos) {
+        res.render('produto/lst', {
+            Produtos: produtos
+        });
+    }).catch(function (err) {
+        res.send(err);
+    });
 }
 
 function del(req, res) {
-    Produto.findByIdAndDelete(req.params.id).then(function (produto, err) {
-        if (err) {
-            res.send(err)
-        } else {
-            res.redirect('/produto/lst')
-        }
-    })
+    Produto.findByIdAndDelete(req.params.id).then(function () {
+        res.redirect('/produto/lst');
+    }).catch(function (err) {
+        res.send(err);
+    });
 }
 
 function abreedt(req, res) {
-    Produto.findById(req.params.id).then(function (produto, err) {
-        if (err) {
-            res.send(err)
-        } else {
-            res.render('produto/edt', {
-                Produto: produto
-            })
-        }
-    })
+    Produto.findById(req.params.id).then(function (produto) {
+        res.render('produto/edt', {
+            Produto: produto
+        });
+    }).catch(function (err) {
+        res.send(err);
+    });
 }
 
 function edt(req, res) {
-    Produto.findById(req.params.id).then(function (produto, err) {
-        if (err) {
-            res.send(err)
-        } else {
-            let tempo = req.body.tempo; 
-            // Obtendo a hora e minuto a partir do valor do tempo
-            let [hora, minuto] = tempo.split(':');
-
-            // Criando um novo objeto Date
-            let data = new Date();
-            data.setHours(hora);
-            data.setMinutes(minuto);
-            produto.titulo = req.body.titulo;
-            produto.descricao = req.body.descricao;
-            produto.categorias = req.body.categorias;
-            produto.preco = req.body.preco;
-            produto.foto = req.body.foto;
-            produto.save().then(function (produto, err) {
-                if (err) {
-                    res.send(err);
-                } else {
-                    res.redirect('/produto/lst')
-                }
-            })
-        }
-    })
+    Produto.findById(req.params.id).then(function (produto) {
+        let tempo = req.body.tempo;
+        let [hora, minuto] = tempo.split(':');
+        let data = new Date();
+        data.setHours(hora);
+        data.setMinutes(minuto);
+        
+        produto.titulo = req.body.titulo;
+        produto.descricao = req.body.descricao;
+        produto.categoria = req.body.categoria;
+        produto.preco = req.body.preco;
+        produto.foto = req.body.foto;
+        
+        return produto.save();
+    }).then(function () {
+        res.redirect('/produto/lst');
+    }).catch(function (err) {
+        res.send(err);
+    });
 }
-
-
-
 
 module.exports = {
     abreadd,
@@ -119,4 +90,4 @@ module.exports = {
     abreedt,
     edt,
     del
-}
+};
