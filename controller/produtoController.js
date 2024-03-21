@@ -10,7 +10,7 @@ function add(req, res) {
         descricao: req.body.descricao,
         categoria: req.body.categoria,
         preco: parseInt(req.body.preco),
-        foto: req.body.foto,
+        foto: req.file.filename,
     });
 
     produto.save().then(function (produto) {

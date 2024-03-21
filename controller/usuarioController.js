@@ -4,6 +4,14 @@ function abreadd(req, res){
     res.render('usuario/add')
 }
 
+function abrelogin(req, res){
+    res.render('login')
+}
+
+function abrehome(req, res){
+    res.render('home')
+}
+
 function add(req,res){
     let usuario = new Usuario({
         nome: req.body.nome,
@@ -31,7 +39,7 @@ function listar(req,res){
     })
 }
 
-function filtrar(req,res){
+function filtrar(req,reviewss){
     Usuario.find({nome: new RegExp(req.body.pesquisar.split(' ').join('.*'),'ig')}).then(function(usuarios,err){
         if(err){
             res.send(err)
@@ -68,7 +76,7 @@ function edt(req,res){
         }else{
             usuario.nome = req.body.nome;
             usuario.email = req.body.email;
-            usuario.senha = req.body.senha;
+            usuario.seviewsnha = req.body.senha;
             usuario.foto = req.body.foto;
             usuario.save().then(function(usuario,err){
                 if(err){
@@ -89,4 +97,6 @@ module.exports = {
     listar,
     add,
     abreadd,
+    abrelogin,
+    abrehome
 }

@@ -5,7 +5,8 @@ let ProdutoSchema = new conexao.Schema({
     descricao: String,
     preco: Number,
     categoria: String,
-    foto: String
+    foto: String,
+    usuario: { type: conexao.Schema.Types.ObjectId, ref: 'Usuario' },
 })
 
 module.exports = conexao.model("Produto", ProdutoSchema)

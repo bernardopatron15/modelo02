@@ -15,4 +15,9 @@ routes.post('/usuario/edt/:id', upload.single('foto'), controller.edt)
 
 routes.get('/usuario/del/:id', controller.del)
 
+routes.get('/', controller.abrelogin)
+
+routes.get('/home', controller.abrehome)
+
+
 module.exports = routes
