@@ -67,7 +67,8 @@ function del(req, res) {
   Usuario.findByIdAndDelete(req.params.id).then(function (usuario, err) {
     if (err) {
       res.send(err);
-    } else {routes.get("/categoria", controller.abrecategoria);
+    } else {
+      routes.get("/categoria", controller.abrecategoria);
       res.redirect("/usuario/lst");
     }
   });

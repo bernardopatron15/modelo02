@@ -1,5 +1,5 @@
 function abrelogin(req, res) {
-  res.render("login");
+  res.render("home");
 }
 
 
