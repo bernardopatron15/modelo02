@@ -12,6 +12,18 @@ function abrehome(req, res) {
   res.render("home");
 }
 
+function abrecategoria(req, res) {
+  res.render("categoria");
+}
+
+function abrecheckout(req, res) {
+  res.render("checkout");
+}
+
+function abreproduto(req, res) {
+  res.render("produto");
+}
+
 function add(req, res) {
   let usuario = new Usuario({
     nome: req.body.nome,
@@ -55,7 +67,7 @@ function del(req, res) {
   Usuario.findByIdAndDelete(req.params.id).then(function (usuario, err) {
     if (err) {
       res.send(err);
-    } else {
+    } else {routes.get("/categoria", controller.abrecategoria);
       res.redirect("/usuario/lst");
     }
   });
@@ -101,4 +113,7 @@ module.exports = {
   abreadd,
   abrelogin,
   abrehome,
+  abrecategoria,
+  abrecheckout,
+  abreproduto,
 };

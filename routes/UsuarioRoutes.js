@@ -19,4 +19,10 @@ routes.get("/", controller.abrelogin);
 
 routes.get("/home", controller.abrehome);
 
+routes.get("/categoria", controller.abrecategoria);
+
+routes.get("/checkout", controller.abrecheckout);
+
+routes.get("/produto", controller.abreproduto);
+
 module.exports = routes;
