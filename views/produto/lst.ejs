@@ -1,39 +1,48 @@
 <%-include('../cabecalho') %>
 <form method="post">
-    <input type="text" name="pesquisar" id="pesquisar" placeholder="Digite aqui o que você deseja pesquisar!">
-    <input type="submit" value="Pesquisar">
+  <input
+    type="text"
+    name="pesquisar"
+    id="pesquisar"
+    placeholder="Digite aqui o que você deseja pesquisar!"
+  />
+  <input type="submit" value="Pesquisar" />
 </form>
 <table>
-    <tr>
-        <th>_id</th>
-        <th>Título</th>
-        <th>Preço</th>
-        <th>Categoria</th>
-        <th>Descrição</th>
-        <th>Foto</th>
-        <th>Usuario</th>
-        <th>Edita</th>
-        <th>Deleta</th>
-    </tr>
+  <tr>
+    <th>_id</th>
+    <th>Título</th>
+    <th>Preço</th>
+    <th>Categoria</th>
+    <th>Descrição</th>
+    <th>Foto</th>
+    <th>Usuario</th>
+    <th>Edita</th>
+    <th>Deleta</th>
+  </tr>
 
-    <%Produtos.forEach(function(produto){  %>
-    <tr>
-        <td><%=produto._id %></td>
-        <td><%=produto.titulo %></td>
-        <td><%=produto.preco %></td>
-        <td><%=produto.categoria %></td>
-        <td><%=produto.descricao %></td>
-        <td>
-            <img style="width: 200px;" src="/fotos/<%=produto.foto %>" alt="Foto do Produto">
-        </td>
-        <td><%= produto.usuario ? produto.usuario.nome : '' %></td>
-        <td>
-            <a href="/produto/edt/<%=produto._id %>">Editar</a>
-        </td>
-        <td>
-            <a href="/produto/del/<%=produto._id %>">Deletar</a>
-        </td>
-    </tr>
-    <% }) %>
+  <%Produtos.forEach(function(produto){ %>
+  <tr>
+    <td><%=produto._id %></td>
+    <td><%=produto.titulo %></td>
+    <td><%=produto.preco %></td>
+    <td><%=produto.categoria %></td>
+    <td><%=produto.descricao %></td>
+    <td>
+      <img
+        style="width: 200px"
+        src="/fotos/<%=produto.foto %>"
+        alt="Foto do Produto"
+      />
+    </td>
+    <td><%= produto.usuario ? produto.usuario.nome : '' %></td>
+    <td>
+      <a href="/produto/edt/<%=produto._id %>">Editar</a>
+    </td>
+    <td>
+      <a href="/produto/del/<%=produto._id %>">Deletar</a>
+    </td>
+  </tr>
+  <% }) %>
 </table>
 <%-include('../rodape') %>
