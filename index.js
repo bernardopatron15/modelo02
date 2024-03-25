@@ -11,9 +11,11 @@ app.use(express.static(path.join(__dirname, "public")));
 const usuarioroutes = require("./routes/UsuarioRoutes");
 const produtoroutes = require("./routes/ProdutoRoutes");
 const postRoutes = require("./routes/PostRoutes");
+const categoriaRoutes = require("./routes/CategoriaRoutes");
 app.use(usuarioroutes);
 app.use(produtoroutes);
 app.use(postRoutes);
+app.use(categoriaRoutes);
 
 app.listen(port, function () {
   console.log("Servidor funcionando!");

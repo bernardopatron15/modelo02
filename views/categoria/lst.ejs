@@ -1,0 +1,32 @@
+<%-include('../cabecalho') %>
+<form method="post">
+  <input
+    type="text"
+    name="pesquisar"
+    id="pesquisar"
+    placeholder="Digite aqui o que você deseja pesquisar!"
+  />
+  <input type="submit" value="Pesquisar" />
+</form>
+<table>
+  <tr>
+    <th>_id</th>
+    <th>Título</th>
+    <th>Edita</th>
+    <th>Deleta</th>
+  </tr>
+
+  <%Categorias.forEach(function(categoria){ %>
+  <tr>
+    <td><%=categoria._id %></td>
+    <td><%=categoria.titulo %></td>
+    <td>
+      <a href="/categoria/edt/<%=categoria._id %>">Editar</a>
+    </td>
+    <td>
+      <a href="/categoria/del/<%=categoria._id %>">Deletar</a>
+    </td>
+  </tr>
+  <% }) %>
+</table>
+<%-include('../rodape') %>

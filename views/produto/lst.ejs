@@ -13,10 +13,9 @@
     <th>_id</th>
     <th>Título</th>
     <th>Preço</th>
-    <th>Categoria</th>
     <th>Descrição</th>
     <th>Foto</th>
-    <th>Usuario</th>
+    <th>Categoria</th>
     <th>Edita</th>
     <th>Deleta</th>
   </tr>
@@ -26,7 +25,6 @@
     <td><%=produto._id %></td>
     <td><%=produto.titulo %></td>
     <td><%=produto.preco %></td>
-    <td><%=produto.categoria %></td>
     <td><%=produto.descricao %></td>
     <td>
       <img
@@ -35,7 +33,7 @@
         alt="Foto do Produto"
       />
     </td>
-    <td><%= produto.usuario ? produto.usuario.nome : '' %></td>
+    <td><%= produto.categoria ? produto.categoria.nome : '' %></td>
     <td>
       <a href="/produto/edt/<%=produto._id %>">Editar</a>
     </td>

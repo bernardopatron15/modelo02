@@ -1,7 +1,10 @@
 const Produto = require("../model/Produto");
+const Categoria = require('../model/Categoria')
 
 function abreadd(req, res) {
-  res.render("produto/add");
+  Categoria.find({}).then(function(categorias){
+      res.render('produto/add', {Categorias: categorias})
+  })    
 }
 
 function add(req, res) {
@@ -24,15 +27,15 @@ function add(req, res) {
 }
 
 function listar(req, res) {
-  Produto.find({})
-    .then(function (produtos) {
-      res.render("produto/lst", {
-        Produtos: produtos,
-      });
-    })
-    .catch(function (err) {
-      res.send(err);
-    });
+  Produto.find({}).populate('categoria').then(function (produtos, err) {
+      if (err) {
+          res.send(err)
+      } else {
+          res.render('produto/lst', {
+              Produtos: produtos
+          })
+      }
+  })
 }
 
 function filtrar(req, res) {
