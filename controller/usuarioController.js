@@ -89,7 +89,7 @@ function edt(req, res) {
     if (err) {
       res.send(err);
     } else {
-      usuario.nome = req.body.nome;
+      usuario.nome = req.body.nome;routes.get("/", controller.abrelogin);
       usuario.email = req.body.email;
       usuario.seviewsnha = req.body.senha;
       usuario.foto = req.body.foto;
