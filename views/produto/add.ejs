@@ -1,17 +1,40 @@
 <%-include('../tela01')-%>
-<h1>Adiciona Produto</h1>
-<form method="post" enctype="multipart/form-data">
-    Titulo: <input type="text" name="titulo" id="titulo"><br />
-    Descrição: <input type="text" name="descricao" id="descricao"><br />
-    Foto: <input type="file" name="foto" id="foto"><br />
-    Preço: <input type="number" name="preco" id="preco"><br />
-    Categoria:
-
-    <select name="categoria">
-        <%Categorias.forEach(function(categoria){%>
-            <option value="<%=categoria._id%>"><%=categoria.nome%></option>
-        <%})%>
-    </select>''
- <input type="submit" value="Adicionar">
-</form>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="jumbotron jumbotron-fluid" style="background-color: #1E3B8C; color: white;">
+                <div class="container">
+                    <h1 class="display-4">Adicionar Produto</h1>
+                    <form method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="titulo">Título:</label>
+                            <input type="text" class="form-control" name="titulo" id="titulo">
+                        </div>
+                        <div class="form-group">
+                            <label for="descricao">Descrição:</label>
+                            <input type="text" class="form-control" name="descricao" id="descricao">
+                        </div>
+                        <div class="form-group">
+                            <label for="foto">Foto:</label>
+                            <input type="file" class="form-control-file" name="foto" id="foto">
+                        </div>
+                        <div class="form-group">
+                            <label for="preco">Preço:</label>
+                            <input type="number" class="form-control" name="preco" id="preco">
+                        </div>
+                        <div class="form-group">
+                            <label for="categoria">Categoria:</label>
+                            <select class="form-control" name="categoria" id="categoria">
+                                <%Categorias.forEach(function(categoria){%>
+                                    <option value="<%=categoria._id%>"><%=categoria.nome%></option>
+                                <%})%>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Adicionar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <%-include('../rodape')-%>

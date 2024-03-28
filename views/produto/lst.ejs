@@ -1,46 +1,53 @@
 <%-include('../tela01') %>
-<form method="post">
-  <input
-    type="text"
-    name="pesquisar"
-    id="pesquisar"
-    placeholder="Digite aqui o que você deseja pesquisar!"
-  />
-  <input type="submit" value="Pesquisar" />
-</form>
-<table>
-  <tr>
-    <th>_id</th>
-    <th>Título</th>
-    <th>Preço</th>
-    <th>Descrição</th>
-    <th>Foto</th>
-    <th>Categoria</th>
-    <th>Edita</th>
-    <th>Deleta</th>
-  </tr>
-
-  <%Produtos.forEach(function(produto){ %>
-  <tr>
-    <td><%=produto._id %></td>
-    <td><%=produto.titulo %></td>
-    <td><%=produto.preco %></td>
-    <td><%=produto.descricao %></td>
-    <td>
-      <img
-        style="width: 200px"
-        src="/fotos/<%=produto.foto %>"
-        alt="Foto do Produto"
-      />
-    </td>
-    <td><%= produto.categoria ? produto.categoria.nome : '' %></td>
-    <td>
-      <a href="/produto/edt/<%=produto._id %>">Editar</a>
-    </td>
-    <td>
-      <a href="/produto/del/<%=produto._id %>">Deletar</a>
-    </td>
-  </tr>
-  <% }) %>
-</table>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="jumbotron jumbotron-fluid" style="background-color: #1E3B8C; color: white;">
+                <div class="container">
+                    <h1 class="display-4">Lista de Produtos</h1>
+                    <form method="post">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="pesquisar" id="pesquisar" placeholder="Digite aqui o que você deseja pesquisar!">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Pesquisar</button>
+                    </form>
+                    <table class="table table-striped mt-4">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Título</th>
+                                <th scope="col">Preço</th>
+                                <th scope="col">Descrição</th>
+                                <th scope="col">Foto</th>
+                                <th scope="col">Categoria</th>
+                                <th scope="col">Editar</th>
+                                <th scope="col">Deletar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%Produtos.forEach(function(produto){ %>
+                            <tr>
+                                <td><%=produto._id %></td>
+                                <td><%=produto.titulo %></td>
+                                <td>R$ <%=produto.preco.toFixed(2) %></td>
+                                <td><%=produto.descricao %></td>
+                                <td>
+                                    <img style="max-width: 100px; max-height: 100px;" src="/fotos/<%=produto.foto %>" alt="Foto do Produto">
+                                </td>
+                                <td><%= produto.categoria ? produto.categoria.nome : '' %></td>
+                                <td>
+                                    <a href="/produto/edt/<%=produto._id %>" class="btn btn-primary btn-sm">Editar</a>
+                                </td>
+                                <td>
+                                    <a href="/produto/del/<%=produto._id %>" class="btn btn-danger btn-sm">Deletar</a>
+                                </td>
+                            </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <%-include('../rodape') %>
