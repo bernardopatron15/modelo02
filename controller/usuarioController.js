@@ -1,15 +1,23 @@
 const Usuario = require("../model/Usuario");
-
+const Produto = require("../model/Produto");
 function abreadd(req, res) {
   res.render("usuario/add");
 }
-
+Produto
 function abrelogin(req, res) {
   res.render("login");
 }
 
 function abrehome(req, res) {
-  res.render("home");
+  Produto.find({}).populate('categoria').then(function (produtos, err) {
+    if (err) {
+        res.send(err)
+    } else {
+        res.render('home', {
+            Produtos: produtos
+        })
+    }
+})
 }
 
 function abrecategoria(req, res) {
