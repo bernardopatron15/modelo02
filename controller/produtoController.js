@@ -1,10 +1,12 @@
 const Produto = require("../model/Produto");
-const Categoria = require('../model/Categoria')
+const Categoria = require('../model/Categoria');
 
 function abreadd(req, res) {
   Categoria.find({}).then(function(categorias){
-      res.render('produto/add', {Categorias: categorias})
-  })    
+    res.render('produto/add', {Categorias: categorias});
+  }).catch(function(err) {
+    res.send(err);
+  });    
 }
 
 function add(req, res) {
@@ -16,8 +18,7 @@ function add(req, res) {
     foto: req.file.filename,
   });
 
-  produto
-    .save()
+  produto.save()
     .then(function (produto) {
       res.redirect("/produto/add");
     })
@@ -28,14 +29,19 @@ function add(req, res) {
 
 function listar(req, res) {
   Produto.find({}).populate('categoria').then(function (produtos, err) {
-      if (err) {
-          res.send(err)
-      } else {
-          res.render('produto/lst', {
-              Produtos: produtos
-          })
-      }
-  })
+    if (err) {
+      res.send(err);
+    } else {
+      Categoria.find({}).then(function(categorias) {
+        res.render('produto/lst', {
+          Produtos: produtos,
+          Categorias: categorias
+        });
+      }).catch(function(err) {
+        res.send(err);
+      });
+    }
+  });
 }
 
 function filtrar(req, res) {

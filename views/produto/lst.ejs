@@ -11,43 +11,49 @@
                         </div>
                         <button type="submit" class="btn btn-primary">Pesquisar</button>
                     </form>
-                    <table class="table table-striped mt-4">
-                        <thead>
-                            <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col">Título</th>
-                                <th scope="col">Preço</th>
-                                <th scope="col">Descrição</th>
-                                <th scope="col">Foto</th>
-                                <th scope="col">Categoria</th>
-                                <th scope="col">Editar</th>
-                                <th scope="col">Deletar</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <%Produtos.forEach(function(produto){ %>
-                            <tr>
-                                <td><%=produto._id %></td>
-                                <td><%=produto.titulo %></td>
-                                <td>R$ <%=produto.preco.toFixed(2) %></td>
-                                <td><%=produto.descricao %></td>
-                                <td>
-                                    <img style="max-width: 100px; max-height: 100px;" src="/fotos/<%=produto.foto %>" alt="Foto do Produto">
-                                </td>
-                                <td><%= produto.categoria ? produto.categoria.nome : '' %></td>
-                                <td>
-                                    <a href="/produto/edt/<%=produto._id %>" class="btn btn-primary btn-sm">Editar</a>
-                                </td>
-                                <td>
-                                    <a href="/produto/del/<%=produto._id %>" class="btn btn-danger btn-sm">Deletar</a>
-                                </td>
-                            </tr>
-                            <% }) %>
-                        </tbody>
-                    </table>
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <% Produtos.forEach(function(produto) { %>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="square-img-wrapper">
+                        <img class="card-img-top square-img" src="/fotos/<%= produto.foto %>" alt="Foto do Produto">
+                    </div>
+                    <div class="card-body text-center">
+                        <h5 class="card-title"><%= produto.titulo %></h5>
+                        <p class="card-text">R$ <%= produto.preco.toFixed(2) %></p>
+                    </div>
+                    <div class="card-footer text-center">
+                        <div class="btn-group">
+                            <a href="/produto/edt/<%= produto._id %>" class="btn btn-sm btn-outline-secondary">Editar</a>
+                            <a href="/produto/del/<%= produto._id %>" class="btn btn-sm btn-outline-danger">Deletar</a>
+                        </div>
+                        <small class="text-muted d-block"><%= produto.categoria ? produto.categoria.nome : '' %></small>
+                    </div>
+                </div>
+            </div>
+        <% }); %>
+    </div>
 </div>
 <%-include('../rodape') %>
+
+<style>
+    .square-img-wrapper {
+        width: 100%;
+        padding-top: 100%; /* Criando um espaço em branco com proporção 1:1 */
+        position: relative;
+        overflow: hidden;
+    }
+    .square-img-wrapper img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+</style>

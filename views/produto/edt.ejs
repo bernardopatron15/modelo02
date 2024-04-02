@@ -1,10 +1,36 @@
 <%-include('../tela01')-%>
-<h1>Edita Produto</h1>
-<form method="post" enctype="multipart/form-data">
-    Titulo: <input type="text" name="titulo" id="titulo" value="<%=Produto.titulo%>"><br />
-    Descrição: <input type="text" name="descricao" id="descricao" value="<%=Produto.descricao%>"><br />
-    Foto: <input type="file" name="foto" id="foto"><br />
-    Preço: <input type="number" name="preco" id="preco" value="<%=Produto.preco%>"><br />
-    <input type="submit" value="Adicionar">
-</form>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="jumbotron jumbotron-fluid" style="background-color: #1E3B8C; color: white;">
+                <div class="container">
+                    <h1 class="display-4">Editar Produto</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <form method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="titulo" style="color: #1E3B8C;">Título:</label>
+                    <input type="text" class="form-control" name="titulo" id="titulo" value="<%= Produto.titulo %>">
+                </div>
+                <div class="form-group">
+                    <label for="descricao" style="color: #1E3B8C;">Descrição:</label>
+                    <input type="text" class="form-control" name="descricao" id="descricao" value="<%= Produto.descricao %>">
+                </div>
+                <div class="form-group">
+                    <label for="foto" style="color: #1E3B8C;">Foto:</label>
+                    <input type="file" class="form-control-file" name="foto" id="foto">
+                </div>
+                <div class="form-group">
+                    <label for="preco" style="color: #1E3B8C;">Preço:</label>
+                    <input type="number" class="form-control" name="preco" id="preco" value="<%= Produto.preco %>">
+                </div>
+                <button type="submit" class="btn btn-primary">Editar</button>
+            </form>
+        </div>
+    </div>
+</div>
 <%-include('../rodape')-%>
