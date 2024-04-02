@@ -1,4 +1,4 @@
-<%-include('../tela01')-%>
+<%-include('../cabecalho')-%>
 <div class="container">
     <div class="row">
         <div class="col">
@@ -10,7 +10,8 @@
                             <label for="titulo">Título:</label>
                             <input type="text" class="form-control" name="titulo" id="titulo">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group"><%-include('../rodape2')-%>
+
                             <label for="descricao">Descrição:</label>
                             <input type="text" class="form-control" name="descricao" id="descricao">
                         </div>
@@ -37,4 +38,4 @@
         </div>
     </div>
 </div>
-<%-include('../rodape')-%>
+<%-include('../rodape2')-%>
