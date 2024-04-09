@@ -2,12 +2,18 @@ const Produto = require("../model/Produto");
 const Categoria = require('../model/Categoria');
 
 function abreadd(req, res) {
-  Categoria.find({}).then(function(categorias){
-    res.render('produto/add', {Categorias: categorias});
-  }).catch(function(err) {
-    res.send(err);
-  });    
+  Categoria.find({})
+    .then(function(categorias) {
+      res.render('produto/add', {
+        Produto: {}, // Passa um objeto vazio como Produto
+        Categorias: categorias
+      });
+    })
+    .catch(function(err) {
+      res.send(err);
+    });    
 }
+
 
 function add(req, res) {
   let produto = new Produto({

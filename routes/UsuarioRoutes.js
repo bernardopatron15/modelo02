@@ -14,13 +14,14 @@ routes.post("/", async (req, res) => {
     if (usuario) {
       res.redirect("/produto/add"); 
     } else {
-      res.status(401).send("Email ou senha incorretos");
+      res.render("login", { error: "Email ou senha incorretos" }); // Renderiza a página de login com a mensagem de erro
     }
   } catch (error) {
     console.error("Erro ao tentar fazer login:", error);
     res.status(500).send("Ocorreu um erro ao tentar fazer login");
   }
 });
+
 
 
 routes.get("/usuario/add", controller.abreadd);

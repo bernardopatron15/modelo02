@@ -24,6 +24,11 @@
                             <span class="fa fa-user-o"></span>
                         </div>
                         <h3 class="text-center mb-4">Login</h3>
+                        <% if (typeof error !== 'undefined') { %>
+                            <div class="alert alert-danger" role="alert">
+                                <%= error %>
+                            </div>
+                        <% } %>
                         <!-- Alteração: Definindo a rota de login -->
                         <form action="/" method="POST" class="login-form">
                             <div class="form-group">
