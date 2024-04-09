@@ -14,20 +14,20 @@
         <th>Deleta</th>
     </tr>
 
-    <%Usuarios.forEach(function(usuario){  %>
+    <% Usuarios.forEach(function(usuario) {  %>
     <tr>
-        <td><%=usuario._id %></td>
-        <td><%=usuario.nome %></td>
-        <td><%=usuario.email %></td>
+        <td><%= usuario._id %></td>
+        <td><%= usuario.nome %></td>
+        <td><%= usuario.email %></td>
         <td>
-            <img style="width: 200px;" src="/fotos/<%=usuario.foto %>" alt="Foto do Usuário">
+            <img style="width: 200px;" src="/fotos/<%= usuario.foto %>" alt="Foto do Usuário">
         </td>
-        <td><%=usuario.criacao %></td>
+        <td><%= usuario.criacao %></td>
         <td>
-            <a href="/usuario/edt/<%=usuario._id %>">Editar</a>
+            <a href="/usuario/edt/<%= usuario._id %>">Editar</a>
         </td>
         <td>
-            <a href="/usuario/del/<%=usuario._id %>">Deletar</a>
+            <a href="/usuario/del/<%= usuario._id %>">Deletar</a>
         </td>
     </tr>
     <% }) %>
