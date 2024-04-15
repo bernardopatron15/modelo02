@@ -43,6 +43,6 @@ routes.get("/categoria", controller.abrecategoria);
 
 routes.get("/checkout", controller.abrecheckout);
 
-routes.get("/produto", controller.abreproduto);
+routes.get("/produto/:id", controller.abreproduto);
 
 module.exports = routes;

@@ -28,8 +28,9 @@ function abrecheckout(req, res) {
   res.render("checkout");
 }
 
-function abreproduto(req, res) {
-  res.render("produto");
+async function abreproduto(req, res) {
+  let produto = await Produto.findById(req.params.id)
+  res.render("produto", {produto: produto});
 }
 
 function add(req, res) {

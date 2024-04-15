@@ -105,10 +105,9 @@
                   <div class="product-body">
                     <p class="product-category"><%=produto.categoria.titulo%></p>
                     <h3 class="product-name">
-                      <a href="#"><%=produto.titulo%></a>
+                      <a href="/produto/<%=produto._id%>"><%=produto.titulo%></a>
                     </h3>
-                    <h4 class="product-price">
-                      $980.00 <del class="product-old-price">$990.00</del>
+                    <h4 class="product-price">R$ <%=produto.preco%><del class="product-old-price">$990.00</del>
                     </h4>
                     <div class="product-rating"></div>
                     <div class="product-btns">
