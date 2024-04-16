@@ -29,9 +29,18 @@ function abrecheckout(req, res) {
 }
 
 async function abreproduto(req, res) {
-  let produto = await Produto.findById(req.params.id)
-  res.render("produto", {produto: produto});
+  Produto.find({}).populate('categoria').then(function (produtos, err) {
+    if (err) {
+        res.send(err)
+    } else {
+        res.render('produto', {
+            Produtos: produtos
+        })
+    }
+})
 }
+
+
 
 function add(req, res) {
   let usuario = new Usuario({
