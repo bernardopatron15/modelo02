@@ -29,12 +29,12 @@ function abrecheckout(req, res) {
 }
 
 async function abreproduto(req, res) {
-  Produto.find({}).populate('categoria').then(function (produtos, err) {
+  Produto.findById(req.params.id).populate('categoria').then(function (produto, err) {
     if (err) {
         res.send(err)
     } else {
         res.render('produto', {
-            Produtos: produtos
+            produto: produto
         })
     }
 })
