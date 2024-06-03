@@ -24,8 +24,16 @@ function abrecategoria(req, res) {
   res.render("categoria");
 }
 
-function abrecheckout(req, res) {
-  res.render("checkout");
+async function abrecheckout(req, res) {
+  Produto.findById(req.params.id).populate('categoria').then(function (produto, err) {
+    if (err) {
+        res.send(err)
+    } else {
+        res.render('checkout', {
+            produto: produto
+        })
+    }
+})
 }
 
 async function abreproduto(req, res) {

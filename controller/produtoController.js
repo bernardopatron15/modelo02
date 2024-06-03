@@ -46,7 +46,17 @@ function listar(req, res) {
         });
       }).catch(function(err) {
         res.send(err);
-      });
+      });async function abreproduto(req, res) {
+        Produto.findById(req.params.id).populate('categoria').then(function (produto, err) {
+          if (err) {
+              res.send(err)
+          } else {
+              res.render('produto', {
+                  produto: produto
+              })
+          }
+      })
+      }
     }
   });
 }

@@ -128,9 +128,12 @@
                     </div>
                   </div>
                   <div class="add-to-cart">
-                    <button class="add-to-cart-btn">
-                      <i class="fa fa-shopping-cart"></i> add to cart
-                    </button>
+                    <a href="/produto/<%=produto._id%>">
+                      <button class="add-to-cart-btn">
+                        <i class="fa fa-shopping-cart"></i> COMPRAR AGORA
+                      </button>
+                    </a>
+                    
                   </div>
                 </div>
                 <% }); %>
@@ -183,7 +186,7 @@
             </li>
             <li>
               <div>
-                <h3>60</h3>
+                <h3>60</h3>TOTAL
                 <span>Secs</span>
               </div>
             </li>
@@ -239,7 +242,7 @@
                     <div class="product-img">
                       <img src="/fotos/<%= produto.foto %>" alt="" />
                       <div class="product-label">
-                        <span class="sale">-30%</span>
+                        <span class="sale">-3%</span>
                       </div>
                     </div>
                     <div class="product-body">
@@ -247,7 +250,7 @@
                       <h3 class="product-name">
                         <a href="/produto/<%=produto._id%>"><%=produto.titulo%></a>
                       </h3>
-                      <h4 class="product-price">R$ <%=produto.preco%><del class="product-old-price">$990.00</del>
+                      <h4 class="product-price">R$ <%=produto.preco%><del class="product-old-price">$99.00</del>
                       </h4>
                       <div class="product-rating"></div>
                       <div class="product-btns">
@@ -261,15 +264,16 @@
                         </button>
                         <button class="quick-view">
                           <i class="fa fa-eye"></i
-                          ><span class="tooltipp">quick view</span>
+                          ><span class="tooltipp">quick vie</span>
                         </button>
                       </div>
                     </div>
-                    <div class="add-to-cart">
-                      <button class="add-to-cart-btn">
-                        <i class="fa fa-shopping-cart"></i> add to cart
+                    <a href="/checkout/<%=produto._id%>">
+                      <button class="add-to-cart-btn" id="123">
+                        <i class="fa fa-shopping-cart"></i> add to car
                       </button>
-                    </div>
+                    </a>
+                    
                   </div>
                   <% }); %>
                   <!-- /product -->
@@ -305,7 +309,7 @@
             <div id="slick-nav-3" class="products-slick-nav"></div>
           </div>
         </div>
-
+        TOTAL
         <div class="products-widget-slick" data-nav="#slick-nav-3">
           <div>
 

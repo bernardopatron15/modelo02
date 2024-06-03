@@ -68,7 +68,9 @@
       <!-- Product details -->
       <div class="col-md-5">
         <div class="product-details">
-          <h2 class="product-name"><%=produto.titulo%></h2>
+          <h2 class="product-name">
+            <%=produto.titulo%>
+          </h2>
           <div>
             <div class="product-rating">
               <i class="fa fa-star"></i>
@@ -77,7 +79,7 @@
               <i class="fa fa-star"></i>
               <i class="fa fa-star-o"></i>
             </div>
-            <a class="review-link" href="#">10 Review(s) | Add your review</a>
+            <a class="review-link" href="">10 Review(s) | Add your review</a>
           </div>
           <div>
             <h3 class="product-price"><%=produto.preco%><del class="product-old-price">$99000.00</del>
@@ -110,9 +112,12 @@
                 <span class="qty-down">-</span>
               </div>
             </div>
-            <button class="add-to-cart-btn">
-              <i class="fa fa-shopping-cart"></i> add to cart
-            </button>
+            <a href="/checkout/<%=produto._id%>">
+              <button class="add-to-cart-btn">
+                <i class="fa fa-shopping-cart"></i> COMPRAR AGORA
+              </button>
+            </a>
+            
           </div>
 
           <ul class="product-btns">

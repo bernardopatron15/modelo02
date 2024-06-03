@@ -41,7 +41,7 @@ routes.get("/home", controller.abrehome);
 
 routes.get("/categoria", controller.abrecategoria);
 
-routes.get("/checkout", controller.abrecheckout);
+routes.get("/checkout/:id", controller.abrecheckout);
 
 routes.get("/produto/:id", controller.abreproduto);
 
