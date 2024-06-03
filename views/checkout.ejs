@@ -27,84 +27,55 @@
     <!-- row -->
     <div class="row">
       <div class="col-md-7">
+
+
         <!-- Billing Details -->
-        <div class="billing-details">
-          <div class="section-title">
-            <h3 class="title">Endereço</h3>
-          </div>
-          <div class="form-group">
-            <input
-              class="input"
-              type="text"
-              name="first-name"
-              placeholder="Nome Completo"
-            />
-          </div>
-          <div class="form-group">
-            <input
-              class="input"
-              type="text"
-              name="last-name"
-              placeholder="CPF"
-            />
-          </div>
-          <div class="form-group">
-            <input
-              class="input"
-              type="email"
-              name="email"
-              placeholder="Email"
-            />
-          </div>
-          <div class="form-group">
-            <input
-              class="input"
-              type="text"
-              name="address"
-              placeholder="Endereço"
-            />
-          </div>
-          <div class="form-group">
-            <input class="input" type="text" name="city" placeholder="Cidade" />
-          </div>
-          <div class="form-group">
-            <input
-              class="input"
-              type="text"
-              name="zip-code"
-              placeholder="CEP"
-            />
-          </div>
-          <div class="form-group">
-            <input
-              class="input"
-              type="tel"
-              name="tel"
-              placeholder="Celular"
-            />
-          </div>
-          <div class="form-group">
-            <div class="input-checkbox">
-              <input type="checkbox" id="create-account" />
-              <label for="create-account">
-                <span></span>
-                Criar Conta?
-              </label>
-              <div class="caption">
-                <p>
-                  Ta sem conta ainda paizão, ai chupou bala, larga a senha ai em baixo
-                </p>
-                <input
-                  class="input"
-                  type="password"
-                  name="password"
-                  placeholder="Digite a sua Senha"
-                />
+        <form method="post" >
+          <div class="billing-details">
+            <div class="section-title">
+              <h3 class="title">Endereço</h3>
+            </div>
+            <div class="form-group">
+              <input class="input" type="text" name="first-name" placeholder="Nome Completo" id="nome"/>
+            </div>
+            <div class="form-group">
+              <input class="input" type="text" name="last-name" placeholder="CPF"/>
+            </div>
+            <div class="form-group">
+              <input class="input" type="email" name="email" placeholder="Email"/>
+            </div>
+            <div class="form-group">
+              <input class="input" type="text" name="address" placeholder="Endereço"/>
+            </div>
+            <div class="form-group">
+              <input class="input" type="text" name="city" placeholder="Cidade"/>
+            </div>
+            <div class="form-group">
+              <input class="input" type="text" name="zip-code" placeholder="CEP"/>
+            </div>
+            <div class="form-group">
+              <input class="input" type="tel" name="tel" placeholder="Celular"/>
+            </div>
+            <div class="form-group">
+              <div class="input-checkbox">
+                <input type="checkbox" id="create-account"/>
+                <label for="create-account">
+                  <span></span>
+                  Criar Conta?
+                </label>
+                <div class="caption">
+                  <p>Ta sem conta ainda paizão, ai chupou bala, larga a senha ai em baixo</p>
+                  <input class="input" type="password" name="password" placeholder="Digite a sua Senha"/>
+                </div>
               </div>
             </div>
+            <!-- Adicione um botão de submissão aqui -->
+            <button type="submit" class="btn btn-primary">Enviar</button>
           </div>
-        </div>
+        </form>
         <!-- /Billing Details -->
+
+        
 
         <!-- Order notes -->
         <div class="order-notes">

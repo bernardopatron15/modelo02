@@ -10,12 +10,12 @@ app.use(express.static(path.join(__dirname, "public")));
 
 const usuarioroutes = require("./routes/UsuarioRoutes");
 const produtoroutes = require("./routes/ProdutoRoutes");
-const postRoutes = require("./routes/PostRoutes");
+const pedidoRoutes = require("./routes/PedidoRoutes");
 const categoriaRoutes = require("./routes/CategoriaRoutes");
 
 app.use(produtoroutes);
 app.use(usuarioroutes);
-app.use(postRoutes);
+app.use(pedidoRoutes);
 app.use(categoriaRoutes);
 
 app.listen(port, function () {

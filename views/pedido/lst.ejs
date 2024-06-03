@@ -1,0 +1,35 @@
+<%-include('../tela01') %>
+<form method="post">
+    <input type="text" name="pesquisar" id="pesquisar" placeholder="Digite aqui o que você deseja pesquisar!">
+    <input type="submit" value="Pesquisar">
+</form>
+<table>
+    <tr>
+        <th>_id</th>
+        <th>Nome</th>
+        <th>CPF</th>
+        <th>Email</th>
+        <th>Endereço</th>
+        <th>Cidade</th>
+        <th>CEP</th>
+        <th>Celular</th>
+        <th>Deleta</th>
+    </tr>
+
+    <%Pedidos.forEach(function(pedido){  %>
+    <tr>
+        <td><%=pedido._id %></td>
+        <td><%=post.titulo %></td>
+        <td><%=post.texto %></td>
+        <td><%=post.texto %></td>
+        <td><%=post.texto %></td>
+        <td><%=post.texto %></td>
+        <td><%=post.texto %></td>
+        <td><%=post.texto %></td>
+        <td>
+            <a href="/pedido/del/<%=pedido._id %>">Deletar</a>
+        </td>
+    </tr>
+    <% }) %>
+</table>
+<%-include('../rodape') %>
