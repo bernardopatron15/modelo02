@@ -2,6 +2,7 @@ const Produto = require("../model/Produto");
 const Categoria = require('../model/Categoria');
 
 function abreadd(req, res) {
+  console.log("oi mundo")
   Categoria.find({})
     .then(function(categorias) {
       res.render('produto/add', {
@@ -10,8 +11,8 @@ function abreadd(req, res) {
       });
     })
     .catch(function(err) {
-      res.send(err);
-    });    
+      res.send("oi mundo");
+    }); 
 }
 
 

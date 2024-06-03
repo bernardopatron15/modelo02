@@ -12,8 +12,9 @@ const usuarioroutes = require("./routes/UsuarioRoutes");
 const produtoroutes = require("./routes/ProdutoRoutes");
 const postRoutes = require("./routes/PostRoutes");
 const categoriaRoutes = require("./routes/CategoriaRoutes");
-app.use(usuarioroutes);
+
 app.use(produtoroutes);
+app.use(usuarioroutes);
 app.use(postRoutes);
 app.use(categoriaRoutes);
 
