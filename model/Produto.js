@@ -4,6 +4,7 @@ let ProdutoSchema = new conexao.Schema({
     titulo: String,
     descricao: String,
     preco: Number,
+    precoantigo: Number,
     categoria: String,
     foto: String,
     categoria: { type: conexao.Schema.Types.ObjectId, ref: 'Categoria' },

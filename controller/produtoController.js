@@ -21,6 +21,7 @@ function add(req, res) {
     descricao: req.body.descricao,
     categoria: req.body.categoria,
     preco: parseInt(req.body.preco),
+    precoantigo: parseInt(req.body.precoantigo),
     foto: req.file.filename,
   });
 
@@ -109,6 +110,7 @@ function edt(req, res) {
       produto.descricao = req.body.descricao;
       produto.categoria = req.body.categoria;
       produto.preco = req.body.preco;
+      produto.precoantigo = req.body.precoantigo;
       produto.foto = req.body.foto;
 
       return produto.save();
