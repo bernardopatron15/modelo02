@@ -4,36 +4,21 @@ const controller = require("../controller/usuarioController");
 const multer = require("multer");
 const upload = multer({ dest: "public/fotos" });
 const Usuario = require("../model/Usuario");
+const passport = require('../config/passport.js'); // Importe o passport
 
-routes.post("/", async (req, res) => {
-  const { email, senha } = req.body;
-
-  try {
-    const usuario = await Usuario.findOne({ email, senha });
-
-    if (usuario) {
-      res.redirect("/produto/add"); 
-    } else {
-      res.render("login", { error: "Email ou senha incorretos" }); // Renderiza a página de login com a mensagem de erro
-    }
-  } catch (error) {
-    console.error("Erro ao tentar fazer login:", error);
-    res.status(500).send("Ocorreu um erro ao tentar fazer login");
+// Middleware para proteger rotas autenticadas
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
   }
-});
+  res.redirect('/'); // Se não autenticado, redireciona para a página de login
+}
 
-
-
-routes.get("/usuario/add", controller.abreadd);
-routes.post("/usuario/add", upload.single("foto"), controller.add);
-
-routes.get("/usuario/lst", controller.listar);
-routes.post("/usuario/lst", controller.filtrar);
-
-routes.get("/usuario/edt/:id", controller.abreedt);
-routes.post("/usuario/edt/:id", upload.single("foto"), controller.edt);
-
-routes.get("/usuario/del/:id", controller.del);
+// Rotas públicas
+routes.post("/", passport.authenticate('local', {
+  successRedirect: '/home',
+  failureRedirect: '/'
+}))
 
 routes.get("/", controller.abrelogin);
 
@@ -44,5 +29,24 @@ routes.get("/categoria", controller.abrecategoria);
 routes.get("/checkout/:id", controller.abrecheckout);
 
 routes.get("/produto/:id", controller.abreproduto);
+
+// Rota para logout
+routes.get('/logout', (req, res) => {
+  req.logout(() => {
+    res.redirect('/home'); // Redireciona para a página inicial após o logout
+  });
+});
+
+// Rotas de usuário
+routes.get("/usuario/add", controller.abreadd);
+routes.post("/usuario/add", upload.single("foto"), controller.add);
+
+routes.get("/usuario/lst", controller.listar);
+routes.post("/usuario/lst", controller.filtrar);
+
+routes.get("/usuario/edt/:id", controller.abreedt);
+routes.post("/usuario/edt/:id", upload.single("foto"), controller.edt);
+
+routes.get("/usuario/del/:id", controller.del);
 
 module.exports = routes;

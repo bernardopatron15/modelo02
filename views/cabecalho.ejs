@@ -62,9 +62,20 @@
             <li>
               <a href="#"><i class="fa fa-dollar"></i> BRL</a>
             </li>
-            <li>
-              <a href="/"><i class="fa fa-user-o"></i> Minha Conta</a>
-            </li>
+            <ul class="header-links pull-right">
+              <li>
+                <% if (usuario) { %>
+                  <a href="/home"><i class="fa fa-user-o"></i> <%= usuario.nome %></a>
+                <% } else { %>
+                  <a href="/"><i class="fa fa-user-o"></i> Minha Conta</a>
+                <% } %>
+              </li>
+              <% if (usuario) { %>
+                <li>
+                  <a href="/logout"><i class="fa fa-sign-out"></i> Sair</a>
+                </li>
+              <% } %>
+            </ul>
           </ul>
         </div>
       </div>

@@ -1,9 +1,10 @@
 const Usuario = require("../model/Usuario");
 const Produto = require("../model/Produto");
+
 function abreadd(req, res) {
   res.render("usuario/add");
 }
-Produto
+
 function abrelogin(req, res) {
   res.render("login");
 }
@@ -14,10 +15,15 @@ function abrehome(req, res) {
         res.send(err)
     } else {
         res.render('home', {
-            Produtos: produtos
+            Produtos: produtos,
+            usuario: req.user // Supondo que o objeto de usuário esteja disponível em req.user
         })
     }
-})
+  });
+}
+
+function renderHome(req, res) {
+  res.render('home'); // Supondo que você queira renderizar a página 'home.ejs'
 }
 
 function abrecategoria(req, res) {
@@ -25,29 +31,28 @@ function abrecategoria(req, res) {
 }
 
 async function abrecheckout(req, res) {
-  Produto.findById(req.params.id).populate('categoria').then(function (produto, err) {
-    if (err) {
-        res.send(err)
-    } else {
-        res.render('checkout', {
-            produto: produto
-        })
-    }
-})
+  try {
+    const produto = await Produto.findById(req.params.id).populate('categoria');
+    res.render('checkout', {
+      produto: produto,
+      usuario: req.user // Supondo que o objeto de usuário esteja disponível em req.user
+    });
+  } catch (err) {
+    res.send(err);
+  }
 }
 
 async function abreproduto(req, res) {
-  Produto.findById(req.params.id).populate('categoria').then(function (produto, err) {
-    if (err) {
-        res.send(err)
-    } else {
-        res.render('produto', {
-            produto: produto
-        })
-    }
-})
+  try {
+    const produto = await Produto.findById(req.params.id).populate('categoria');
+    res.render('produto', {
+      produto: produto,
+      usuario: req.user // Supondo que o objeto de usuário esteja disponível em req.user
+    });
+  } catch (err) {
+    res.send(err);
+  }
 }
-
 
 
 function add(req, res) {
@@ -99,7 +104,6 @@ function del(req, res) {
     if (err) {
       res.send(err);
     } else {
-      routes.get("/categoria", controller.abrecategoria);
       res.redirect("/usuario/lst");
     }
   });
@@ -120,9 +124,9 @@ function edt(req, res) {
     if (err) {
       res.send(err);
     } else {
-      usuario.nome = req.body.nome;routes.get("/", controller.abrelogin);
+      usuario.nome = req.body.nome;
       usuario.email = req.body.email;
-      usuario.seviewsnha = req.body.senha;
+      usuario.senha = req.body.senha; // Correção aqui
       usuario.foto = req.body.foto;
       usuario.cpf = req.body.cpf;
       usuario.endereco = req.body.endereco;
@@ -140,6 +144,13 @@ function edt(req, res) {
   });
 }
 
+function logout(req, res) {
+  // Aqui você pode limpar as informações de autenticação do usuário, como remover o token de sessão, limpar cookies, etc.
+  
+  // Redireciona o usuário para a página de login após o logout
+  res.redirect('/home');
+}
+
 module.exports = {
   edt,
   abreedt,
@@ -153,4 +164,6 @@ module.exports = {
   abrecategoria,
   abrecheckout,
   abreproduto,
+  renderHome,
+  logout,
 };

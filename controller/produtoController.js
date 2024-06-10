@@ -6,14 +6,14 @@ function abreadd(req, res) {
     .then(function(categorias) {
       res.render('produto/add', {
         Produto: {}, // Passa um objeto vazio como Produto
-        Categorias: categorias
+        Categorias: categorias,
+        usuario: req.user // Passa o objeto de usuário para a página
       });
     })
     .catch(function(err) {
       res.send("err");
     }); 
 }
-
 
 function add(req, res) {
   let produto = new Produto({
@@ -42,21 +42,12 @@ function listar(req, res) {
       Categoria.find({}).then(function(categorias) {
         res.render('produto/lst', {
           Produtos: produtos,
-          Categorias: categorias
+          Categorias: categorias,
+          usuario: req.user // Passa o objeto de usuário para a página
         });
       }).catch(function(err) {
         res.send(err);
-      });async function abreproduto(req, res) {
-        Produto.findById(req.params.id).populate('categoria').then(function (produto, err) {
-          if (err) {
-              res.send(err)
-          } else {
-              res.render('produto', {
-                  produto: produto
-              })
-          }
-      })
-      }
+      });
     }
   });
 }
@@ -68,6 +59,7 @@ function filtrar(req, res) {
     .then(function (produtos) {
       res.render("produto/lst", {
         Produtos: produtos,
+        usuario: req.user // Passa o objeto de usuário para a página
       });
     })
     .catch(function (err) {
@@ -90,6 +82,7 @@ function abreedt(req, res) {
     .then(function (produto) {
       res.render("produto/edt", {
         Produto: produto,
+        usuario: req.user // Passa o objeto de usuário para a página
       });
     })
     .catch(function (err) {
