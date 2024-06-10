@@ -56,6 +56,11 @@ function add(req, res) {
     email: req.body.email,
     senha: req.body.senha,
     foto: req.file.filename,
+    cpf: req.body.cpf,
+    endereco: req.body.endereco,
+    cidade: req.body.cidade,
+    cep: req.body.cep,
+    celular: req.body.celular,
   });
 
   usuario.save().then(function (usuario, err) {
@@ -119,6 +124,11 @@ function edt(req, res) {
       usuario.email = req.body.email;
       usuario.seviewsnha = req.body.senha;
       usuario.foto = req.body.foto;
+      usuario.cpf = req.body.cpf;
+      usuario.endereco = req.body.endereco;
+      usuario.cidade = req.body.cidade;
+      usuario.cep = req.body.cep;
+      usuario.celular = req.body.celular;
       usuario.save().then(function (usuario, err) {
         if (err) {
           res.send(err);

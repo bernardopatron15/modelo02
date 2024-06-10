@@ -5,7 +5,12 @@ let UsuarioSchema = new conexao.Schema({
     email: String,
     senha: String,
     criacao: { type: Date, default: Date.now },
-    foto: String
+    foto: String,
+    cpf: String,
+    endereco: String,
+    cidade: String,
+    cep: String,
+    celular: String
 })
 
 module.exports = conexao.model("Usuario", UsuarioSchema)

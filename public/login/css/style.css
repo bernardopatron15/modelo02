@@ -8144,7 +8144,7 @@ a {
   -webkit-transition: .3s all ease;
   -o-transition: .3s all ease;
   transition: .3s all ease;
-  color: #1089ff; }
+  color: #000; }
   a:hover, a:focus {
     text-decoration: none !important;
     outline: none !important;
@@ -8191,7 +8191,7 @@ h1, h2, h3, h4, h5,
   .login-wrap .icon {
     width: 80px;
     height: 80px;
-    background: #1089ff;
+    background: #E1140A;
     border-radius: 50%;
     font-size: 30px;
     margin: 0 auto;
@@ -8270,9 +8270,9 @@ textarea.form-control {
 
 /* Style the checkmark/indicator */
 .checkbox-primary {
-  color: #1089ff; }
+  color: #000; }
   .checkbox-primary input:checked ~ .checkmark:after {
-    color: #1089ff; }
+    color: #E1140A; }
 
 .btn {
   cursor: pointer;
@@ -8283,8 +8283,8 @@ textarea.form-control {
   .btn:hover, .btn:active, .btn:focus {
     outline: none; }
   .btn.btn-primary {
-    background: #1089ff !important;
-    border: 1px solid #1089ff !important;
+    background: #E1140A !important;
+    border: 1px solid #fff !important;
     color: #fff !important; }
     .btn.btn-primary:hover {
       border: 1px solid #1089ff;
