@@ -29,7 +29,11 @@ passport.serializeUser(function (user, cb) {
             nome: user.nome,
             email: user.email,
             foto: user.foto,
-            admin: user.admin
+            cpf: user.cpf,
+            endereco: user.endereco,
+            cidade: user.cidade,
+            cep: user.cep,
+            celular: user.celular,
         });
     });
 });
