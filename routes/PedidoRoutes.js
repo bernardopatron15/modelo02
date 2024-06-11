@@ -1,13 +1,11 @@
 const express = require('express');
 const routes = express.Router();
-const controller = require('../controller/pedidoController')
-const multer = require('multer')
-const upload = multer({ dest: 'public/fotos' })
-//criar rotas aqui
+const pedidoController = require('../controller/pedidoController');
 
-routes.get('/pedido/lst', controller.listar)
-routes.post('/pedido/lst', controller.filtrar)
+// Rotas para pedidos
+routes.post('/pedido/add', pedidoController.add);
+routes.get('/pedido/lst', pedidoController.listar);
+routes.post('/pedido/lst', pedidoController.filtrar);
+routes.get('/pedido/del/:id', pedidoController.del);
 
-routes.get('/pedido/del/:id', controller.del)
-
-module.exports = routes
+module.exports = routes;

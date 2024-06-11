@@ -1,50 +1,54 @@
-const Pedido = require('../model/Pedido')
+const Pedido = require('../model/Pedido');
 
 function add(req, res) {
     let pedido = new Pedido({
-      nome: req.body.nome,
-      cpf: req.body.cpf,
-      email: req.body.email,
-      endereco: req.body.endereco,
-      cidade: req.body.cidade,
-      cep: req.body.cep,
-      celular: req.body.celular,
+        nome: req.body.nome,
+        cpf: req.body.cpf,
+        email: req.body.email,
+        endereco: req.body.endereco,
+        cidade: req.body.cidade,
+        cep: req.body.cep,
+        celular: req.body.celular,
+        produto: req.body.produto_id, // Inclua o ID do produto
     });
-  
-    produto.save()
-      .then(function (pedido) {
-        res.redirect("/home");
-      })
-      .catch(function (err) {
-        res.send(err);
-      });
-  }
 
+    pedido.save()
+        .then(function (pedido) {
+            res.redirect("/home");  // Redirecionar após salvar o pedido
+        })
+        .catch(function (err) {
+            res.send(err);  // Exibir erro caso ocorra
+        });
+}
 
 function listar(req, res) {
-    Pedido.find({}).then(function (pedidos, err) {
-        if (err) {
-            res.send(err);
-        } else {
-            res.render('pedido/lst', {
-                Pedidos: pedidos
-            });
-        }
-    });
+    Pedido.find({})
+        .populate('produto') // Populando o campo 'produto' para acessar os dados do produto associado
+        .then(function (pedidos, err) {
+            if (err) {
+                res.send(err);
+            } else {
+                res.render('pedido/lst', {
+                    Pedidos: pedidos
+                });
+            }
+        });
 }
 
 function filtrar(req, res) {
     Pedido.find({
-        titulo: new RegExp(req.body.pesquisar.split(' ').join('.*'), 'ig')
-    }).then(function (pedidos, err) {
-        if (err) {
-            res.send(err)
-        } else {
-            res.render('pedido/lst', {
-                Pedidos: pedidos
-            })
-        }
+        produto: req.body.produto_id // Ajuste para buscar pelo ID do produto corretamente
     })
+        .populate('produto') // Populando o campo 'produto' para acessar os dados do produto associado
+        .then(function (pedidos, err) {
+            if (err) {
+                res.send(err);
+            } else {
+                res.render('pedido/lst', {
+                    Pedidos: pedidos
+                });
+            }
+        });
 }
 
 function del(req, res) {
@@ -54,7 +58,7 @@ function del(req, res) {
         } else {
             res.redirect('/pedido/lst')
         }
-    })
+    });
 }
 
 module.exports = {
@@ -62,4 +66,4 @@ module.exports = {
     listar,
     filtrar,
     del
-}
+};

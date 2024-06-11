@@ -6,6 +6,8 @@
 <table>
     <tr>
         <th>_id</th>
+        <th>Nome do Produto</th>
+        <th>Preço do Produto</th>
         <th>Nome</th>
         <th>CPF</th>
         <th>Email</th>
@@ -16,18 +18,25 @@
         <th>Deleta</th>
     </tr>
 
-    <%Pedidos.forEach(function(pedido){  %>
+    <% Pedidos.forEach(function(pedido) { %>
     <tr>
-        <td><%=pedido._id %></td>
-        <td><%=post.titulo %></td>
-        <td><%=post.texto %></td>
-        <td><%=post.texto %></td>
-        <td><%=post.texto %></td>
-        <td><%=post.texto %></td>
-        <td><%=post.texto %></td>
-        <td><%=post.texto %></td>
+        <td><%= pedido._id %></td>
+        <% if (pedido.produto) { %>
+            <td><%= pedido.produto.titulo %></td> <!-- Campo do nome do produto -->
+            <td><%= pedido.produto.preco %></td> <!-- Campo do preço do produto -->
+        <% } else { %>
+            <td>Não definido</td>
+            <td>Não definido</td>
+        <% } %>
+        <td><%= pedido.nome %></td>
+        <td><%= pedido.cpf %></td>
+        <td><%= pedido.email %></td>
+        <td><%= pedido.endereco %></td>
+        <td><%= pedido.cidade %></td>
+        <td><%= pedido.cep %></td>
+        <td><%= pedido.celular %></td>
         <td>
-            <a href="/pedido/del/<%=pedido._id %>">Deletar</a>
+            <a href="/pedido/del/<%= pedido._id %>">Deletar</a>
         </td>
     </tr>
     <% }) %>
