@@ -27,12 +27,13 @@ function add(req, res) {
 
   produto.save()
     .then(function (produto) {
-      res.redirect("/produto/add");
+      res.redirect("/produto/lst"); // Corrigido para redirecionar para a página de listagem de produtos
     })
     .catch(function (err) {
       res.send(err);
     });
 }
+
 
 function listar(req, res) {
   Produto.find({}).populate('categoria').then(function (produtos, err) {

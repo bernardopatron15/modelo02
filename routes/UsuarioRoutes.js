@@ -30,6 +30,8 @@ routes.get("/checkout/:id", controller.abrecheckout);
 
 routes.get("/produto/:id", controller.abreproduto);
 
+routes.get('/obrigado', controller.agradecer);
+
 // Rota para logout
 routes.get('/logout', (req, res) => {
   req.logout(() => {

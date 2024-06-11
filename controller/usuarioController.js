@@ -30,6 +30,19 @@ function abrecategoria(req, res) {
   res.render("categoria");
 }
 
+async function agradecer(req, res) {
+  try {
+    const produtos = await Produto.find({}).populate('categoria');
+    res.render('obrigado', {
+      Produtos: produtos,
+      usuario: req.user // Supondo que o objeto de usuário esteja disponível em req.user
+    });
+  } catch (err) {
+    res.send(err);
+  }
+}
+
+
 async function abrecheckout(req, res) {
   try {
     const produto = await Produto.findById(req.params.id).populate('categoria');
@@ -166,4 +179,5 @@ module.exports = {
   abreproduto,
   renderHome,
   logout,
+  agradecer,
 };

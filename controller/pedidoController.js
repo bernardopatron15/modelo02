@@ -14,7 +14,7 @@ function add(req, res) {
 
     pedido.save()
         .then(function (pedido) {
-            res.redirect("/home");  // Redirecionar após salvar o pedido
+            res.redirect("/obrigado");  // Redirecionar após salvar o pedido
         })
         .catch(function (err) {
             res.send(err);  // Exibir erro caso ocorra
