@@ -1,6 +1,7 @@
 const Produto = require("../model/Produto");
 const Categoria = require('../model/Categoria');
 
+
 function abreadd(req, res) {
   Categoria.find({})
     .then(function(categorias) {
@@ -19,7 +20,7 @@ function add(req, res) {
   let produto = new Produto({
     titulo: req.body.titulo,
     descricao: req.body.descricao,
-    categoria: req.body.categoria,
+    categoria: req.body.categoria, // Aqui você deve associar pelo ID da categoria
     preco: parseInt(req.body.preco),
     precoantigo: parseInt(req.body.precoantigo),
     foto: req.file.filename,
@@ -27,30 +28,24 @@ function add(req, res) {
 
   produto.save()
     .then(function (produto) {
-      res.redirect("/produto/lst"); // Corrigido para redirecionar para a página de listagem de produtos
+      res.redirect("/produto/lst");
     })
     .catch(function (err) {
       res.send(err);
     });
 }
 
-
 function listar(req, res) {
-  Produto.find({}).populate('categoria').then(function (produtos, err) {
-    if (err) {
-      res.send(err);
-    } else {
-      Categoria.find({}).then(function(categorias) {
-        res.render('produto/lst', {
-          Produtos: produtos,
-          Categorias: categorias,
-          usuario: req.user // Passa o objeto de usuário para a página
-        });
-      }).catch(function(err) {
-        res.send(err);
+  Produto.find({}).populate('categoria')
+    .then(function (produtos) {
+      res.render('produto/lst', {
+        Produtos: produtos,
+        usuario: req.user // Passa o objeto de usuário para a página
       });
-    }
-  });
+    })
+    .catch(function (err) {
+      res.send(err);
+    });
 }
 
 function filtrar(req, res) {
@@ -81,10 +76,17 @@ function del(req, res) {
 function abreedt(req, res) {
   Produto.findById(req.params.id)
     .then(function (produto) {
-      res.render("produto/edt", {
-        Produto: produto,
-        usuario: req.user // Passa o objeto de usuário para a página
-      });
+      Categoria.find({})
+        .then(function (categorias) {
+          res.render("produto/edt", {
+            Produto: produto,
+            Categorias: categorias,
+            usuario: req.user // Passa o objeto de usuário para a página
+          });
+        })
+        .catch(function (err) {
+          res.send(err);
+        });
     })
     .catch(function (err) {
       res.send(err);
@@ -102,7 +104,7 @@ function edt(req, res) {
 
       produto.titulo = req.body.titulo;
       produto.descricao = req.body.descricao;
-      produto.categoria = req.body.categoria;
+      produto.categoria = req.body.categoria; // Aqui você deve associar pelo ID da categoria
       produto.preco = req.body.preco;
       produto.precoantigo = req.body.precoantigo;
       produto.foto = req.body.foto;

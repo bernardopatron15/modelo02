@@ -1,6 +1,21 @@
 const Usuario = require("../model/Usuario");
 const Produto = require("../model/Produto");
 
+async function listarProdutosPorCategoria(req, res) {
+  try {
+    const categoriaId = req.params.categoriaId;
+
+    const produtos = await Produto.find({ categoria: categoriaId }).populate('categoria');
+
+    res.render('produtos_por_categoria', {
+      Produtos: produtos,
+      usuario: req.user // Supondo que o objeto de usuário esteja disponível em req.user
+    });
+  } catch (err) {
+    res.send(err);
+  }
+}
+
 function abreadd(req, res) {
   res.render("usuario/add");
 }
@@ -27,8 +42,21 @@ function renderHome(req, res) {
   res.render('home'); // Supondo que você queira renderizar a página 'home.ejs'
 }
 
-function abrecategoria(req, res) {
-  res.render("categoria");
+async function abrecategoria(req, res) {
+  try {
+    // Aqui você pode ajustar para buscar os produtos de acordo com a categoria selecionada
+    const categoria = req.params.categoria; // Supondo que você passa a categoria como parte da URL
+
+    // Buscar produtos por categoria (exemplo)
+    const produtos = await Produto.find({ categoria: categoria });
+
+    res.render('categoria', {
+      produtos: produtos,
+      usuario: req.user // Supondo que o objeto de usuário esteja disponível em req.user
+    });
+  } catch (err) {
+    res.send(err);
+  }
 }
 
 async function agradecer(req, res) {
@@ -179,4 +207,5 @@ module.exports = {
   renderHome,
   logout,
   agradecer,
+  listarProdutosPorCategoria,
 };

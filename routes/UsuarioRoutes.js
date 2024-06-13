@@ -39,6 +39,9 @@ routes.get('/logout', (req, res) => {
   });
 });
 
+// Rota para listar produtos por categoria
+routes.get('/categoria/:categoriaId/produtos', controller.listarProdutosPorCategoria);
+
 // Rotas de usuário
 routes.get("/usuario/add", controller.abreadd);
 routes.post("/usuario/add", upload.single("foto"), controller.add);
