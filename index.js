@@ -35,8 +35,9 @@ const pedidoRoutes = require("./routes/PedidoRoutes");
 const categoriaRoutes = require("./routes/CategoriaRoutes");
 
 // Uso das rotas
-app.use(usuarioroutes);
 app.use(produtoroutes);
+app.use(usuarioroutes);
+
 app.use(pedidoRoutes);
 app.use(categoriaRoutes);
 
