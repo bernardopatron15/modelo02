@@ -3,7 +3,6 @@ const routes = express.Router();
 const controller = require("../controller/usuarioController");
 const multer = require("multer");
 const upload = multer({ dest: "public/fotos" });
-const Usuario = require("../model/Usuario");
 const passport = require('../config/passport.js'); // Importe o passport
 
 // Middleware para proteger rotas autenticadas
@@ -17,8 +16,9 @@ function ensureAuthenticated(req, res, next) {
 // Rotas públicas
 routes.post("/", passport.authenticate('local', {
   successRedirect: '/home',
-  failureRedirect: '/'
-}))
+  failureRedirect: '/',
+  failureFlash: true  // Habilitar mensagens de falha com connect-flash
+}));
 
 routes.get("/", controller.abrelogin);
 

@@ -4,6 +4,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 const passport = require('passport');
 const session = require('express-session');
+const flash = require('connect-flash');  // Adicionado o connect-flash
 
 // Configuração da sessão
 app.use(session({
@@ -11,6 +12,8 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
 }));
+
+app.use(flash());  // Usar o middleware flash
 
 // Inicialização do Passport
 app.use(passport.initialize());

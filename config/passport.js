@@ -12,14 +12,12 @@ passport.use(new LocalStrategy({
     })    
     
     if (!usuario) {        
-        return cb(null, false, 'Email não encontrado.')
+        return cb(null, false, req.flash('error', 'Email não encontrado.'));
     } else if (usuario.senha != password) {
-        console.log('Erro de senha')
-        return cb(null, false, 'Senha incorreta.')
+        return cb(null, false, req.flash('error', 'Senha incorreta.'));
     } else {
         return cb(null, usuario);
     }
-
 }));
 
 passport.serializeUser(function (user, cb) {
@@ -43,6 +41,5 @@ passport.deserializeUser(function (user, cb) {
         return cb(null, user);
     });
 });
-
 
 module.exports = passport;

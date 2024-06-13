@@ -6,18 +6,19 @@ function abreadd(req, res) {
 }
 
 function abrelogin(req, res) {
-  res.render("login");
+  const error = req.flash('error'); // Obter a mensagem de erro da flash
+  res.render("login", { error: error.length > 0 ? error[0] : null });
 }
 
 function abrehome(req, res) {
   Produto.find({}).populate('categoria').then(function (produtos, err) {
     if (err) {
-        res.send(err)
+      res.send(err);
     } else {
-        res.render('home', {
-            Produtos: produtos,
-            usuario: req.user // Supondo que o objeto de usuário esteja disponível em req.user
-        })
+      res.render('home', {
+        Produtos: produtos,
+        usuario: req.user // Supondo que o objeto de usuário esteja disponível em req.user
+      });
     }
   });
 }
@@ -42,7 +43,6 @@ async function agradecer(req, res) {
   }
 }
 
-
 async function abrecheckout(req, res) {
   try {
     const produto = await Produto.findById(req.params.id).populate('categoria');
@@ -66,7 +66,6 @@ async function abreproduto(req, res) {
     res.send(err);
   }
 }
-
 
 function add(req, res) {
   let usuario = new Usuario({
@@ -100,7 +99,7 @@ function listar(req, res) {
   });
 }
 
-function filtrar(req, reviewss) {
+function filtrar(req, res) {
   Usuario.find({
     nome: new RegExp(req.body.pesquisar.split(" ").join(".*"), "ig"),
   }).then(function (usuarios, err) {
