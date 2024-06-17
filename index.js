@@ -29,12 +29,14 @@ app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "public")));
 
 // Importação das rotas
+const admroutes = require("./routes/AdmRoutes");
 const usuarioroutes = require("./routes/UsuarioRoutes");
 const produtoroutes = require("./routes/ProdutoRoutes");
 const pedidoRoutes = require("./routes/PedidoRoutes");
 const categoriaRoutes = require("./routes/CategoriaRoutes");
 
 // Uso das rotas
+app.use(admroutes);
 app.use(produtoroutes);
 app.use(usuarioroutes);
 

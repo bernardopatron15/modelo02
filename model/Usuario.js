@@ -10,7 +10,8 @@ let UsuarioSchema = new conexao.Schema({
     endereco: String,
     cidade: String,
     cep: String,
-    celular: String
+    celular: String,
+    admin: 'Boolean'
 })
 
 module.exports = conexao.model("Usuario", UsuarioSchema)
