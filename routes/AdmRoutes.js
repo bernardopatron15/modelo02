@@ -1,40 +1,44 @@
 const express = require("express");
 const routes = express.Router();
 const controller = require("../controller/usuarioController");
+const admcontroller = require("../controller/admController");
 const multer = require("multer");
 const upload = multer({ dest: "public/fotos" });
-const passport = require('../config/passport.js'); // Importe o passport
+const passport = require("../config/passport.js"); // Importe o passport
+const adm = require("../config/autenticacaoadm.js");
 
 // Middleware para proteger rotas autenticadas
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
-  res.redirect('/loginadm'); // Se não autenticado, redireciona para a página de login
+  res.redirect("/"); // Se não autenticado, redireciona para a página de login
 }
 
 // Rotas públicas
-routes.post("/loginadm", passport.authenticate('local', {
-  successRedirect: '/pedido/lst',
-  failureRedirect: '/loginadm',
-  failureFlash: true  // Habilitar mensagens de falha com connect-flash
-}));
+routes.post(
+  "/loginadm",
+  passport.authenticate("local", {
+    successRedirect: "/pedido/lst",
+    failureRedirect: "/loginadm",
+    failureFlash: true, // Habilitar mensagens de falha com connect-flash
+  })
+);
 
-routes.get("/loginadm", controller.abreloginadm);
+//routes.get("/loginadm", admcontroller.abreloginadm);
 
 // Rota para logout
-routes.get('/logout', (req, res) => {
+routes.get("/logout", (req, res) => {
   req.logout(() => {
-    res.redirect('/loginadm'); // Redireciona para a página inicial após o logout
+    res.redirect("/home"); // Redireciona para a página inicial após o logout
   });
 });
 
-
 // Rotas de usuário
-routes.get("/adm/add", controller.abreadd);
-routes.post("/adm/add", upload.single("foto"), controller.add);
+routes.get("/adm/add",adm,admcontroller.abreadd);
+routes.post("/adm/add", upload.single("foto"), admcontroller.add);
 
-routes.get("/adm/lst", controller.listar);
+routes.get("/adm/lst",adm, admcontroller.listar);
 routes.post("/adm/lst", controller.filtrar);
 
 routes.get("/adm/edt/:id", controller.abreedt);

@@ -32,6 +32,7 @@ passport.serializeUser(function (user, cb) {
             cidade: user.cidade,
             cep: user.cep,
             celular: user.celular,
+            admin: user.admin
         });
     });
 });

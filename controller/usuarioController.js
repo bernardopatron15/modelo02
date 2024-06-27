@@ -106,6 +106,7 @@ function add(req, res) {
     cidade: req.body.cidade,
     cep: req.body.cep,
     celular: req.body.celular,
+    admin: false
   });
 
   usuario.save().then(function (usuario, err) {
