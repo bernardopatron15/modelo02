@@ -7,7 +7,7 @@ async function listarProdutosPorCategoria(req, res) {
 
     const produtos = await Produto.find({ categoria: categoriaId }).populate('categoria');
 
-    res.render('produtos_por_categoria', {
+    res.render('categoria', {
       Produtos: produtos,
       usuario: req.user // Supondo que o objeto de usuário esteja disponível em req.user
     });
