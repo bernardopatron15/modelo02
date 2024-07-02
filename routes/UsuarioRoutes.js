@@ -3,7 +3,7 @@ const routes = express.Router();
 const controller = require("../controller/usuarioController");
 const multer = require("multer");
 const upload = multer({ dest: "public/fotos" });
-const passport = require('../config/passport.js'); // Importe o passport
+const passport = require('../config/passport.js');
 
 // Middleware para proteger rotas autenticadas
 function ensureAuthenticated(req, res, next) {

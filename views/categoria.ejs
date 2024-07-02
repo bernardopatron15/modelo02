@@ -8,7 +8,7 @@
         <ul class="breadcrumb-tree">
           
           <li><a href="#">Home</a></li>
-          <li><a href="#">Eletronico</a></li>
+          <li><a href="#">Categoria</a></li>
         </ul>
       </div>
     </div>
@@ -88,18 +88,18 @@
                   <img src="/fotos/<%= product.foto %>" alt="<%= product.titulo %>" />
                   <% if (true) { %>
                     <div class="product-label">
-                      <span class="sale">-30%</span>
-                      <span class="new">NEW</span>
+                      <span class="sale">-<%= product.desconto %>%</span>
+                      <span class="new">Novo</span>
                     </div>
                   <% } %>
                 </div>
                 <div class="product-body">
-                  <p class="product-category">Category</p>
+                  <p class="product-category"><%= product.categoria.titulo %></p>
                   <h3 class="product-name">
                     <a href="#"><%= product.titulo %></a>
                   </h3>
                   <h4 class="product-price">
-                    $<%= product.preco %> <del class="product-old-price">$990.00</del>
+                    $<%= product.preco %> <del class="product-old-price"><%= product.precoantigo %></del>
                   </h4>
                   <div class="product-rating">
                     <!-- Rating stars or other indicators -->
@@ -117,9 +117,11 @@
                   </div>
                 </div>
                 <div class="add-to-cart">
-                  <button class="add-to-cart-btn">
-                    <i class="fa fa-shopping-cart"></i> add to cart
-                  </button>
+                  <a href="/produto/<%=product._id%>">
+                    <button class="add-to-cart-btn">
+                      <i class="fa fa-shopping-cart"></i> COMPRAR AGORA
+                    </button>
+                  </a>
                 </div>
               </div>
             </div>

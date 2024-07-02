@@ -7,8 +7,14 @@ async function listarProdutosPorCategoria(req, res) {
 
     const produtos = await Produto.find({ categoria: categoriaId }).populate('categoria');
 
+    // Adiciona o percentual de desconto a cada produto
+    const produtosComDesconto = produtos.map(produto => {
+      const desconto = produto.getDescontoPercentual();
+      return { ...produto._doc, desconto };
+    });
+
     res.render('categoria', {
-      Produtos: produtos,
+      Produtos: produtosComDesconto,
       usuario: req.user // Supondo que o objeto de usuário esteja disponível em req.user
     });
   } catch (err) {
@@ -26,17 +32,37 @@ function abrelogin(req, res) {
 }
 
 function abrehome(req, res) {
-  Produto.find({}).populate('categoria').then(function (produtos, err) {
-    if (err) {
-      res.send(err);
-    } else {
+  // IDs das categorias específicas
+  const categoriaEletronicoId = "6601b67256536508dd6acc69";
+  const categoriaSalaId = "66831500940f42d034cb50fc";
+  const categoriaCozinhaId = "660c62f69c121a0aaaf1640e";
+
+  // Promises para buscar produtos de cada categoria
+  const eletronicoPromise = Produto.find({ categoria: categoriaEletronicoId }).populate('categoria');
+  const salaPromise = Produto.find({ categoria: categoriaSalaId }).populate('categoria');
+  const cozinhaPromise = Produto.find({ categoria: categoriaCozinhaId }).populate('categoria');
+
+  // Executa todas as promises e processa os resultados
+  Promise.all([eletronicoPromise, salaPromise, cozinhaPromise])
+    .then(function ([eletronicoProdutos, salaProdutos, cozinhaProdutos]) {
+      // Adiciona o percentual de desconto a cada produto
+      const eletronicoComDesconto = eletronicoProdutos.map(produto => ({ ...produto._doc, desconto: produto.getDescontoPercentual() }));
+      const salaComDesconto = salaProdutos.map(produto => ({ ...produto._doc, desconto: produto.getDescontoPercentual() }));
+      const cozinhaComDesconto = cozinhaProdutos.map(produto => ({ ...produto._doc, desconto: produto.getDescontoPercentual() }));
+
       res.render('home', {
-        Produtos: produtos,
+        eletronicoProdutos: eletronicoComDesconto,
+        salaProdutos: salaComDesconto,
+        cozinhaProdutos: cozinhaComDesconto,
         usuario: req.user // Supondo que o objeto de usuário esteja disponível em req.user
       });
-    }
-  });
+    })
+    .catch(function (err) {
+      res.send(err);
+    });
 }
+
+
 
 function renderHome(req, res) {
   res.render('home'); // Supondo que você queira renderizar a página 'home.ejs'
@@ -44,26 +70,34 @@ function renderHome(req, res) {
 
 async function abrecategoria(req, res) {
   try {
-    // Aqui você pode ajustar para buscar os produtos de acordo com a categoria selecionada
-    const categoria = req.params.categoria; // Supondo que você passa a categoria como parte da URL
+    const categoria = req.params.categoria;
 
-    // Buscar produtos por categoria (exemplo)
     const produtos = await Produto.find({ categoria: categoria });
 
+    const produtosComDesconto = produtos.map(produto => {
+      const desconto = produto.getDescontoPercentual();
+      return { ...produto._doc, desconto };
+    });
+
     res.render('categoria', {
-      produtos: produtos,
+      produtos: produtosComDesconto,
       usuario: req.user // Supondo que o objeto de usuário esteja disponível em req.user
     });
   } catch (err) {
     res.send(err);
-  }
+  }admin: Boolean
 }
 
 async function agradecer(req, res) {
   try {
     const produtos = await Produto.find({}).populate('categoria');
+    const produtosComDesconto = produtos.map(produto => {
+      const desconto = produto.getDescontoPercentual();
+      return { ...produto._doc, desconto };
+    });
+
     res.render('obrigado', {
-      Produtos: produtos,
+      Produtos: produtosComDesconto,
       usuario: req.user // Supondo que o objeto de usuário esteja disponível em req.user
     });
   } catch (err) {
@@ -74,8 +108,11 @@ async function agradecer(req, res) {
 async function abrecheckout(req, res) {
   try {
     const produto = await Produto.findById(req.params.id).populate('categoria');
+    const desconto = produto.getDescontoPercentual();
+    const produtoComDesconto = { ...produto._doc, desconto };
+
     res.render('checkout', {
-      produto: produto,
+      produto: produtoComDesconto,
       usuario: req.user // Supondo que o objeto de usuário esteja disponível em req.user
     });
   } catch (err) {
@@ -86,8 +123,11 @@ async function abrecheckout(req, res) {
 async function abreproduto(req, res) {
   try {
     const produto = await Produto.findById(req.params.id).populate('categoria');
+    const desconto = produto.getDescontoPercentual();
+    const produtoComDesconto = { ...produto._doc, desconto };
+
     res.render('produto', {
-      produto: produto,
+      produto: produtoComDesconto,
       usuario: req.user // Supondo que o objeto de usuário esteja disponível em req.user
     });
   } catch (err) {
@@ -105,7 +145,7 @@ function add(req, res) {
     endereco: req.body.endereco,
     cidade: req.body.cidade,
     cep: req.body.cep,
-    celular: req.body.celular,
+    celular: req.body.celular,admin: Boolean,
     admin: false
   });
 
@@ -149,7 +189,7 @@ function del(req, res) {
     }
   });
 }
-
+admin: Boolean
 function abreedt(req, res) {
   Usuario.findById(req.params.id).then(function (usuario, err) {
     if (err) {
@@ -186,9 +226,6 @@ function edt(req, res) {
 }
 
 function logout(req, res) {
-  // Aqui você pode limpar as informações de autenticação do usuário, como remover o token de sessão, limpar cookies, etc.
-  
-  // Redireciona o usuário para a página de login após o logout
   res.redirect('/home');
 }
 
