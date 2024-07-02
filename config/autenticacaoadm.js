@@ -1,9 +1,8 @@
 function aut(req, res, next) {
-    console.log(req.user)
-   if (req.isAuthenticated()&&req.user.admin) {
-       return next();
-   }
-   res.redirect("/home");
-};
+    if (req.isAuthenticated() && req.user) {
+        return next();
+    }
+    res.redirect('/login'); // Redirecione para uma página de login ou erro
+}
 
-module.exports = aut
+module.exports = aut;

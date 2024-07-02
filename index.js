@@ -34,14 +34,17 @@ const usuarioroutes = require("./routes/UsuarioRoutes");
 const produtoroutes = require("./routes/ProdutoRoutes");
 const pedidoRoutes = require("./routes/PedidoRoutes");
 const categoriaRoutes = require("./routes/CategoriaRoutes");
+const carrinhoRoutes = require("./routes/CarrinhoRoutes"); // Importar as rotas do carrinho
 
 // Uso das rotas
+app.use(carrinhoRoutes);
 app.use(admroutes);
+
 app.use(produtoroutes);
 app.use(usuarioroutes);
-
 app.use(pedidoRoutes);
 app.use(categoriaRoutes);
+ // Usar as rotas do carrinho
 
 // Inicialização do servidor
 app.listen(port, function () {
